@@ -1,0 +1,11 @@
+import  numpy as np
+import pandas as pd
+import random
+path = "C:\\Users\\yjr\\Desktop\\1002131.csv"
+#获取数据集
+data_set = pd.read_csv(path,encoding = 'gb2312')
+for index,row in data_set.iterrows():
+    if (index+1)%2 == 0:
+        data_set = data_set.drop(index=index)
+
+data_set.to_csv(path,index=False)
