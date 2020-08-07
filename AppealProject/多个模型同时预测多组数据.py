@@ -25,17 +25,26 @@ scalar91 = MinMaxScaler(feature_range=(-1,1))
 scalar92 = MinMaxScaler(feature_range=(-1,1))
 scalar101 = MinMaxScaler(feature_range=(-1,1))
 scalar102 = MinMaxScaler(feature_range=(-1,1))
+scalar111 = MinMaxScaler(feature_range=(-1,1))
+scalar112 = MinMaxScaler(feature_range=(-1,1))
+scalar121 = MinMaxScaler(feature_range=(-1,1))
+scalar122 = MinMaxScaler(feature_range=(-1,1))
+scalar131 = MinMaxScaler(feature_range=(-1,1))
+scalar132 = MinMaxScaler(feature_range=(-1,1))
+scalar141 = MinMaxScaler(feature_range=(-1,1))
+scalar142 = MinMaxScaler(feature_range=(-1,1))
 
 def create_data(path,scalar1,scalar2):
     # 获取数据集
     data_set = pd.read_csv(path)
-    data_set = data_set.drop(['DTIME'], axis=1)
-    data_set = data_set.drop(['GOOD_CODE'], axis=1)
+
     # 反转 使数据按照日期先后顺序排列
     data_set = data_set[::-1]
     data_x = data_set.drop(['PDICT3'], axis=1)
     data_x = data_x.drop(['PDICT5'], axis=1)
     data_x = data_x.drop(['PDICT7'], axis=1)
+    data_x = data_x.drop(['PDICT15'], axis=1)
+    data_x = data_x.drop(['PDICTMON'], axis=1)
     data_x = data_x.astype('float')
     data_y = data_set['PDICT3']
     data_y = data_y.astype('float')
@@ -61,20 +70,26 @@ def create_data(path,scalar1,scalar2):
     test_set = list_x
     return train_set, test_set, data_y
 
-train_set_5006044,test_set_5006044,data_y_5006044 = create_data("C:\\Users\\yjr\\Desktop\\5006044.csv",scalar11,scalar12)
-train_set_1013260,test_set_1013260,data_y_1013260 = create_data("C:\\Users\\yjr\\Desktop\\1013260.csv",scalar21,scalar22)
-train_set_1013153,test_set_1013153,data_y_1013153 = create_data("C:\\Users\\yjr\\Desktop\\1013153.csv",scalar31,scalar32)
-train_set_1016924,test_set_1016924,data_y_1016924 = create_data("C:\\Users\\yjr\\Desktop\\1016924.csv",scalar41,scalar42)
-train_set_1000346,test_set_1000346,data_y_1000346 = create_data("C:\\Users\\yjr\\Desktop\\1000346.csv",scalar61,scalar62)
-train_set_1007265,test_set_1007265,data_y_1007265 = create_data("C:\\Users\\yjr\\Desktop\\1007265.csv",scalar71,scalar72)
-train_set_1001608,test_set_1001608,data_y_1001608 = create_data("C:\\Users\\yjr\\Desktop\\1001608.csv",scalar81,scalar82)
-train_set_1004984,test_set_1004984,data_y_1004984 = create_data("C:\\Users\\yjr\\Desktop\\1004984.csv",scalar91,scalar92)
-train_set_5005122,test_set_5005122,data_y_5005122 = create_data("C:\\Users\\yjr\\Desktop\\5005122.csv",scalar101,scalar102)
-train_set_1003975,test_set_1003975,data_y_1003975 = create_data("C:\\Users\\yjr\\Desktop\\1003975.csv",scalar51,scalar52)
+train_set_1000223,test_set_1000223,data_y_1000223 = create_data("C:\\Users\\yjr\\Desktop\\1000223.csv",scalar11,scalar12)
+train_set_1000542,test_set_1000542,data_y_1000542 = create_data("C:\\Users\\yjr\\Desktop\\1000542.csv",scalar21,scalar22)
+train_set_1000819,test_set_1000819,data_y_1000819 = create_data("C:\\Users\\yjr\\Desktop\\1000819.csv",scalar31,scalar32)
+train_set_1000160,test_set_1000160,data_y_1000160 = create_data("C:\\Users\\yjr\\Desktop\\1000160.csv",scalar41,scalar42)
+train_set_1000433,test_set_1000433,data_y_1000433 = create_data("C:\\Users\\yjr\\Desktop\\1000433.csv",scalar51,scalar52)
+train_set_1000256,test_set_1000256,data_y_1000256 = create_data("C:\\Users\\yjr\\Desktop\\1000256.csv",scalar61,scalar62)
+train_set_1000312,test_set_1000312,data_y_1000312 = create_data("C:\\Users\\yjr\\Desktop\\1000312.csv",scalar71,scalar72)
+train_set_1000016,test_set_1000016,data_y_1000016 = create_data("C:\\Users\\yjr\\Desktop\\1000016.csv",scalar81,scalar82)
+train_set_1000627,test_set_1000627,data_y_1000627 = create_data("C:\\Users\\yjr\\Desktop\\1000627.csv",scalar91,scalar92)
+train_set_1000138,test_set_1000138,data_y_1000138 = create_data("C:\\Users\\yjr\\Desktop\\1000138.csv",scalar101,scalar102)
+train_set_1000146,test_set_1000146,data_y_1000146 = create_data("C:\\Users\\yjr\\Desktop\\1000146.csv",scalar111,scalar112)
+train_set_1000321,test_set_1000321,data_y_1000321 = create_data("C:\\Users\\yjr\\Desktop\\1000321.csv",scalar121,scalar122)
+train_set_1000643,test_set_1000643,data_y_1000643 = create_data("C:\\Users\\yjr\\Desktop\\1000643.csv",scalar131,scalar132)
+train_set_1000363,test_set_1000363,data_y_1000363 = create_data("C:\\Users\\yjr\\Desktop\\1000363.csv",scalar141,scalar142)
+
+#list = ['1000223','1000542','1000819','1000160','1000433','1000256','1000312','1000016','1000627','1000138','1000146','1000321','1000643','1000363']
 
 #建立模型
 class MyLSTM(nn.Module):
-    def __init__(self,input_size = 11,hidden_layer_size=256,output_size=10):
+    def __init__(self,input_size = 18,hidden_layer_size=32,output_size=10):
         super(MyLSTM, self).__init__()
         self.hidden_layer_size = hidden_layer_size
         self.lstm = nn.LSTM(input_size,self.hidden_layer_size)
@@ -96,6 +111,11 @@ model7 = MyLSTM()
 model8 = MyLSTM()
 model9 = MyLSTM()
 model10 = MyLSTM()
+model11 = MyLSTM()
+model12 = MyLSTM()
+model13 = MyLSTM()
+model14 = MyLSTM()
+
 
 #定义损失函数和优化器
 
@@ -109,7 +129,10 @@ loss_function7 = nn.MSELoss()
 loss_function8 = nn.MSELoss()
 loss_function9 = nn.MSELoss()
 loss_function10 = nn.MSELoss()
-
+loss_function11 = nn.MSELoss()
+loss_function12 = nn.MSELoss()
+loss_function13 = nn.MSELoss()
+loss_function14 = nn.MSELoss()
 
 optimizer1 = torch.optim.Adam(model1.parameters())
 optimizer2 = torch.optim.Adam(model2.parameters())
@@ -121,9 +144,13 @@ optimizer7 = torch.optim.Adam(model7.parameters())
 optimizer8 = torch.optim.Adam(model8.parameters())
 optimizer9 = torch.optim.Adam(model9.parameters())
 optimizer10 = torch.optim.Adam(model10.parameters())
+optimizer11 = torch.optim.Adam(model11.parameters())
+optimizer12 = torch.optim.Adam(model12.parameters())
+optimizer13 = torch.optim.Adam(model13.parameters())
+optimizer14 = torch.optim.Adam(model14.parameters())
 
 #训练模型
-epochs = 100
+epochs = 150
 
 
 def train(train_set,model,optimizer,loss_function):
@@ -138,6 +165,8 @@ def train(train_set,model,optimizer,loss_function):
         single_loss = loss_function(y_pred,my_y)
         single_loss.backward()
         optimizer.step()
+        if i % 10 == 0:
+            print(f'epoch: {i:3} loss: {single_loss.item():10.8f}')
 
 def test(test_set,model,scalar2):
     result=[]
@@ -153,99 +182,142 @@ def test(test_set,model,scalar2):
     return  result
 
 for i in range(epochs):
-    train(train_set_5006044,model1,optimizer1,loss_function1)
+    train(train_set_1000223,model1,optimizer1,loss_function1)
 #开始预测
 model1 = model1.eval()
-result_5006044 = test(test_set_5006044,model1,scalar12)
-result_5006044.reverse()
-result_5006044 = pd.DataFrame(result_5006044)
-result_5006044=result_5006044.astype(int)
+result_1000223 = test(test_set_1000223,model1,scalar12)
+result_1000223.reverse()
+result_1000223 = pd.DataFrame(result_1000223)
+result_1000223=result_1000223.astype(int)
 print('1')
 
 
-
+'''
 for i in range(epochs):
-    train(train_set_1013260,model2,optimizer2,loss_function2)
+    train(train_set_1000542,model2,optimizer2,loss_function2)
 model2 = model2.eval()
-result_1013260 = test(test_set_1013260,model2,scalar22)
-result_1013260.reverse()
-result_1013260 = pd.DataFrame(result_1013260)
-result_1013260=result_1013260.astype(int)
+result_1000542 = test(test_set_1000542,model2,scalar22)
+result_1000542.reverse()
+result_1000542 = pd.DataFrame(result_1000542)
+result_1000542=result_1000542.astype(int)
 print('2')
 
 for i in range(epochs):
-    train(train_set_1013153,model3,optimizer3,loss_function3)
+    train(train_set_1000819,model3,optimizer3,loss_function3)
 model3 = model3.eval()
-result_1013153 = test(test_set_1013153,model3,scalar32)
-result_1013153.reverse()
-result_1013153 = pd.DataFrame(result_1013153)
-result_1013153=result_1013153.astype(int)
+result_1000819 = test(test_set_1000819,model3,scalar32)
+result_1000819.reverse()
+result_1000819 = pd.DataFrame(result_1000819)
+result_1000819=result_1000819.astype(int)
 print('3')
 
 
 for i in range(epochs):
-    train(train_set_1016924,model4,optimizer4,loss_function4)
+    train(train_set_1000160,model4,optimizer4,loss_function4)
 model4 = model4.eval()
-result_1016924 = test(test_set_1016924,model4,scalar42)
-result_1016924.reverse()
-result_1016924 = pd.DataFrame(result_1016924)
-result_1016924=result_1016924.astype(int)
+result_1000160 = test(test_set_1000160,model4,scalar42)
+result_1000160.reverse()
+result_1000160 = pd.DataFrame(result_1000160)
+result_1000160=result_1000160.astype(int)
 print('4')
 
 for i in range(epochs):
-    train(train_set_1003975,model5,optimizer5,loss_function5)
+    train(train_set_1000433,model5,optimizer5,loss_function5)
 model5 = model5.eval()
-result_1003975 = test(test_set_1003975,model5,scalar52)
-result_1003975.reverse()
-result_1003975 = pd.DataFrame(result_1003975)
-result_1003975=result_1003975.astype(int)
+result_1000433 = test(test_set_1000433,model5,scalar52)
+result_1000433.reverse()
+result_1000433 = pd.DataFrame(result_1000433)
+result_1000433=result_1000433.astype(int)
 print('5')
 
 
 for i in range(epochs):
-    train(train_set_1000346,model6,optimizer6,loss_function6)
+    train(train_set_1000256,model6,optimizer6,loss_function6)
 model6 = model6.eval()
-result_1000346 = test(test_set_1000346,model6,scalar62)
-result_1000346.reverse()
-result_1000346 = pd.DataFrame(result_1000346)
-result_1000346=result_1000346.astype(int)
+result_1000256 = test(test_set_1000256,model6,scalar62)
+result_1000256.reverse()
+result_1000256 = pd.DataFrame(result_1000256)
+result_1000256=result_1000256.astype(int)
 print('6')
+
+print(train_set_1000312)
 for i in range(epochs):
-    train(test_set_1007265,model7,optimizer7,loss_function7)
+    train(train_set_1000256,model7,optimizer7,loss_function7)
 model7 = model7.eval()
-result_1007265 = test(test_set_1007265,model7,scalar72)
-result_1007265.reverse()
-result_1007265 = pd.DataFrame(result_1007265)
-result_1007265=result_1007265.astype(int)
+result_1000312 = test(test_set_1000312,model7,scalar72)
+result_1000312.reverse()
+result_1000312 = pd.DataFrame(result_1000312)
+result_1000312=result_1000312.astype(int)
 print('7')
+
 for i in range(epochs):
-    train(train_set_1001608,model8,optimizer8,loss_function8)
+    train(train_set_1000016,model8,optimizer8,loss_function8)
 model8 = model8.eval()
-result_1001608 = test(test_set_1001608,model8,scalar82)
-result_1001608.reverse()
-result_1001608 = pd.DataFrame(result_1001608)
-result_1001608=result_1001608.astype(int)
+result_1000016 = test(test_set_1000016,model8,scalar82)
+result_1000016.reverse()
+result_1000016 = pd.DataFrame(result_1000016)
+result_1000016=result_1000016.astype(int)
 print('8')
+
 for i in range(epochs):
-    train(train_set_1004984,model9,optimizer9,loss_function9)
+    train(train_set_1000627,model9,optimizer9,loss_function9)
 model9 = model9.eval()
-result_1004984 = test(test_set_1004984,model9,scalar92)
-result_1004984.reverse()
-result_1004984 = pd.DataFrame(result_1004984)
-result_1004984=result_1004984.astype(int)
+result_1000627 = test(test_set_1000627,model9,scalar92)
+result_1000627.reverse()
+result_1000627 = pd.DataFrame(result_1000627)
+result_1000627=result_1000627.astype(int)
 print('9')
+
 for i in range(epochs):
-    train(train_set_5005122,model10,optimizer10,loss_function10)
+    train(train_set_1000138,model10,optimizer10,loss_function10)
 model10 = model10.eval()
-result_5005122 = test(test_set_5005122,model10,scalar102)
-result_5005122.reverse()
-result_5005122 = pd.DataFrame(result_5005122)
-result_5005122=result_5005122.astype(int)
+result_1000138 = test(test_set_1000138,model10,scalar102)
+result_1000138.reverse()
+result_1000138 = pd.DataFrame(result_1000138)
+result_1000138=result_1000138.astype(int)
 print('10')
 
-result = pd.concat([result_1003975,result_1007265,result_1004984],axis=1)
+
+for i in range(epochs):
+    train(train_set_1000146,model11,optimizer11,loss_function11)
+model11 = model11.eval()
+result_1000146 = test(test_set_1000146,model11,scalar112)
+result_1000146.reverse()
+result_1000146 = pd.DataFrame(result_1000146)
+result_1000146=result_1000146.astype(int)
+print('11')
+
+for i in range(epochs):
+    train(train_set_1000321,model12,optimizer12,loss_function12)
+model12 = model12.eval()
+result_1000321 = test(test_set_1000321,model12,scalar122)
+result_1000321.reverse()
+result_1000321 = pd.DataFrame(result_1000321)
+result_1000321=result_1000321.astype(int)
+print('12')
+
+for i in range(epochs):
+    train(train_set_1000643,model13,optimizer13,loss_function13)
+model13 = model13.eval()
+result_1000643 = test(test_set_1000643,model13,scalar132)
+result_1000643.reverse()
+result_1000643 = pd.DataFrame(result_1000643)
+result_1000643=result_1000643.astype(int)
+print('13')
+
+for i in range(epochs):
+    train(train_set_1000363,model14,optimizer14,loss_function14)
+model14 = model14.eval()
+result_1000363 = test(test_set_1000363,model14,scalar142)
+result_1000363.reverse()
+result_1000363 = pd.DataFrame(result_1000363)
+result_1000363=result_1000363.astype(int)
+print('14')
+
+result = pd.concat([result_1000223,result_1000542,result_1000819,result_1000160,result_1000433,result_1000256,result_1000312,result_1000016,result_1000627,result_1000138,result_1000146,result_1000321,result_1000643,result_1000363],axis=1)
 
 #输出
 output = 'C:\\Users\\yjr\\Desktop\\result3.csv'
 result.to_csv(output,index=False,header=False)
 print('已输出')
+'''
