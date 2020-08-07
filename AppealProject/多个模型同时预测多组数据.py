@@ -242,7 +242,7 @@ print('6')
 
 print(train_set_1000312)
 for i in range(epochs):
-    train(train_set_1000256,model7,optimizer7,loss_function7)
+    train(train_set_1000312,model7,optimizer7,loss_function7)
 model7 = model7.eval()
 result_1000312 = test(test_set_1000312,model7,scalar72)
 result_1000312.reverse()
