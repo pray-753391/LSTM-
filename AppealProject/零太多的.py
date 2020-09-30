@@ -2,7 +2,7 @@ import  numpy as np
 import pandas as pd
 import random
 #获取数据集
-data_set = pd.read_csv("C:\\Users\\yjr\\Desktop\\1000542.csv")
+data_set = pd.read_csv("C:\\Users\\yjr\\Desktop\\1006630.csv")
 data_3 = data_set['PDICT3']
 data_5= data_set['PDICT5']
 data_7 = data_set['PDICT7']
@@ -32,6 +32,7 @@ for x in np.nditer(data_3, op_flags=['readwrite']):
         data.append(y)
     else:
         data.append(x)
+data = data[:-10]
 result_3 = pd.DataFrame(data,columns=['MYPDICT3'])
 result_3 = result_3.astype('int')
 
@@ -46,6 +47,7 @@ for x in np.nditer(data_5, op_flags=['readwrite']):
         data.append(y)
     else:
         data.append(x)
+data = data[:-10]
 result_5 = pd.DataFrame(data,columns=['MYPDICT5'])
 result_5 = result_5.astype('int')
 
@@ -60,6 +62,7 @@ for x in np.nditer(data_7, op_flags=['readwrite']):
         data.append(y)
     else:
         data.append(x)
+data = data[:-10]
 result_7 = pd.DataFrame(data,columns=['MYPDICT7'])
 result_7 = result_7.astype('int')
 
@@ -74,6 +77,7 @@ for x in np.nditer(data_15, op_flags=['readwrite']):
         data.append(y)
     else:
         data.append(x)
+data = data[:-10]
 result_15 = pd.DataFrame(data,columns=['MYPDICT15'])
 result_15 = result_15.astype('int')
 
@@ -88,6 +92,7 @@ for x in np.nditer(data_MON, op_flags=['readwrite']):
         data.append(y)
     else:
         data.append(x)
+data = data[:-10]
 result_MON = pd.DataFrame(data,columns=['MYPDICTMON'])
 result_MON = result_MON.astype('int')
 
