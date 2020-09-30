@@ -1,6 +1,6 @@
-
 import numpy as np
 import pandas as pd
+
 path = "C:\\Users\\yjr\\Desktop\\temproot.csv"
 data_set = pd.read_csv(path)
 
@@ -51,9 +51,7 @@ index=0
 for i in MyArray:
     outpath = outpath1+str(Name[index])+outpath3
     index+=1
-    i['DTIME'] = pd.to_datetime(i['DTIME']);
+    i.loc[:,'DTIME'] = pd.to_datetime(i.loc[:,'DTIME']);
     i = i.sort_values(by='DTIME', ascending=False)
     i = i.drop(['DTIME'],axis=1)
     i.to_csv(outpath,index=False,header=True)
-
-
