@@ -17,6 +17,7 @@ for i in MyArray:
     name = i.head(1)['GOOD_CODE'].to_frame()
     name = name.at[index,'GOOD_CODE']
     name = name.astype(int)
+    i['DTIME'] = pd.to_datetime(i['DTIME']);
     i = i.sort_values(by='DTIME',ascending=False)
     outpath = outpath1+str(name)+outpath3
     i.to_csv(outpath,index=False,header=True)
